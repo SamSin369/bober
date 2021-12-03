@@ -184,7 +184,7 @@ const Home = () => {
             <img src={boberLogo} alt="Netflix Logo" id="homeLogo"/>
             <div class="underline" style={{transform: "translate3d(300%, 0px, 0px)"}}></div>
 
-            <a class="nav-link-glitch" onclick="ul(0)">Главное</a><a class="nav-link-glitch" onclick="ul(1)">Что мы делаем?</a><a class="nav-link-glitch" onclick="ul(2)">Часто Задывемые Вопросы</a>
+            {/* <a class="nav-link-glitch" onclick="ul(0)">Главное</a><a class="nav-link-glitch" onclick="ul(1)">Что мы делаем?</a><a class="nav-link-glitch" onclick="ul(2)">Часто Задывемые Вопросы</a> */}
 
 
         </nav>
