@@ -206,7 +206,9 @@ const Home = () => {
 
 
 
-                <h1>Деньги Даром!</h1>
+                        <p class="logo-1">
+                Деньги Даром
+                </p>
                 <h3>Все на платформе Бобер. абсолютно бесплатно</h3>
                 <p>Вы готовы? Нажмите на кнопку снизу чтобы подать заявку на участие</p>
                 <div id="landingBtnWrap">
@@ -224,7 +226,7 @@ const Home = () => {
 
             <div class="card-1">
                 <div class="desc-1">
-                    <h1>Участвуй На Любом Устройстве</h1>
+                    <h1 class="glower logo-1">Участвуй На Любом Устройстве</h1>
                     <h3>Регистрируйся, участвуй, и получай деньги в любом точке мира в любое время!</h3>
                 </div>
 
@@ -233,13 +235,13 @@ const Home = () => {
             <div class="card-2">
                 <video class="video-2" autoPlay playsInLine muted loop><source src={boberContent2}type="video/mp4"/></video>
                 <div class="desc-2">
-                    <h1>Это Проше Чем 1-2-3</h1>
+                    <h1 class="glower logo-1">Это Проше Чем 1-2-3</h1>
                     <h3>Регистрируйся, участвуй, и полчи деньги это реально так просто</h3>
                 </div>
             </div>
             <div class="card-3">
                 <div class="desc-3">
-                    <h1>Выводи Криптовалюту В Наличные Деньги</h1>
+                    <h1 class="glower logo-1">Выводи Криптовалюту В Наличные Деньги</h1>
                     <h3>Ваше деньги хранятся у вас на личном кошелке в безопасном месте</h3>
                 </div>
                 <img src={boberContent3} alt="Device-Pile-In"/>
