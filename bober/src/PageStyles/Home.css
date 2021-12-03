@@ -942,5 +942,5 @@ img {
   .glower {
       font-size:3rem !important;
       font-weight: 500 !important;
-      
+      z-index: 10000;
   }
