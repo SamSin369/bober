@@ -899,16 +899,17 @@ main {
     position: fixed;
     z-index: 10000000000000000000000;
 }
+.showcase-content .logo-1 {
+    font-size: 5rem !important;
+  }
 
-:root {
+/* :root {
     --shadow-color: var(--light-color);
     --shadow-color-light: white;
   }
   
 
-  .logo-1 {
-    font-size: 5rem !important;
-  }
+  
   .logo-1 p {
     margin: calc(50vh - 40px) auto 0 auto;
    
@@ -946,4 +947,4 @@ main {
       font-size:3rem !important;
       font-weight: 500 !important;
       z-index: 10000;
-  }
+  } */

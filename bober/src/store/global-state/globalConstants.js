@@ -1,0 +1,1 @@
+export const SET_LOADER_VALUE = "SET_LOADER_VALUE"

@@ -10,12 +10,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { signInUser } from "../../auth/authActions";
 import { signInWithEmail } from "../../firestore/firebase-config";
 import { useNavigate } from "react-router-dom";
+import { updateLoading } from "../../store/global-state/globalActions";
 
 const LoginForm = () => {
-  const navigate = useNavigate()
-  const isLoggedIn = useSelector(state => state.auth.authenticated)
-  
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const isLoggedIn = useSelector((state) => state.auth.authenticated);
+
+  const dispatch = useDispatch();
   const initalValues = {
     email: "",
     password: "",
@@ -37,17 +38,14 @@ const LoginForm = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    dispatch(updateLoading(true))
     try {
-      await signInWithEmail(formValues)
-      console.log(isLoggedIn)
-      console.log("user",user)
-    
-        navigate("/Contracts")
-      
-     
-      
+      await signInWithEmail(formValues, navigate, dispatch);
+
+      // console.log(isLoggedIn)
+      // console.log("user",user)
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
     // dispatch(signInUser(formValues))
   };
