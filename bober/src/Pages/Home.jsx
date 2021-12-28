@@ -9,9 +9,12 @@ import boberContent1 from "../resources/videos/boberContent1.mp4"
 import boberContent2 from "../resources/videos/boberContent2.mp4"
 import boberContent3 from "../resources/videos/boberContent3.png"
 
-import {Accordion, AccordionItem} from '../components/Accordion'
+import {Accordion, AccordionItem} from '../components/Accordion/Accordion'
 
 const Home = () => {
+
+ 
+
 
     document.addEventListener('scroll', function (event) {
 
@@ -180,15 +183,15 @@ const Home = () => {
     <main id="main">
        
 
-        <nav id="topNav">
+         {/* <nav id="topNav">
             <img src={boberLogo} alt="Netflix Logo" id="homeLogo"/>
-            <div class="underline" style={{transform: "translate3d(300%, 0px, 0px)"}}></div>
+            <div class="underline" style={{transform: "translate3d(300%, 0px, 0px)"}}></div> */}
 
             {/* <a class="nav-link-glitch" onclick="ul(0)">Главное</a><a class="nav-link-glitch" onclick="ul(1)">Что мы делаем?</a><a class="nav-link-glitch" onclick="ul(2)">Часто Задывемые Вопросы</a> */}
 
 
-        </nav>
-        <a class="neon-button signin-btn" id="signInBro" asp-area="Identity" asp-page="/Account/Login">Войти</a>
+        {/* </nav> */} 
+        {/* <a class="neon-button signin-btn" id="signInBro" asp-area="Identity" asp-page="/Account/Login">Войти</a> */}
 
 
         <header class="showcase">

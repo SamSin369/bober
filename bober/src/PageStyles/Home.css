@@ -246,6 +246,9 @@ img {
     }
 }
 
+main {
+    display: block !important;
+}
 
 .style-cards h1 {
     font-size: 3rem;

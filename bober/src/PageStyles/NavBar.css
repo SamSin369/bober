@@ -1,0 +1,14 @@
+#boberLogo {
+    width: 50px !important;
+    height: 50px !important;
+}
+.ui.fixed.menu {
+    background:#442220;
+    margin-bottom: 80px !important;
+}
+.form-wrap {
+    margin-top:-70px;
+}
+.container {
+    margin: 0;
+}
