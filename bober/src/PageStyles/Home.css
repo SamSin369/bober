@@ -900,7 +900,21 @@ main {
     z-index: 10000000000000000000000;
 }
 .showcase-content .logo-1 {
-    font-size: 5rem !important;
+
+    font-size: clamp(3.6rem, 2.5vw, 5rem); 
+  }
+
+  #contentStart {
+    text-align: center;
+    font-size: clamp(2.5rem, 2.5vw, 4rem);
+    margin:80px 0;
+    line-height: 2                                                      ;
+  }
+  .highlight-text{
+      color: #B5DEAD !important;
+  }
+  .smallHeader {
+      font-size:2rem !important;
   }
 
 /* :root {
