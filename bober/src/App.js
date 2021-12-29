@@ -14,8 +14,8 @@ function App() {
   return (
     <>
       <NavBar />
-      {/* {isLoading ? <Loader/> : null} */}
-      <Loader/>
+      {isLoading ? <Loader/> : null}
+ 
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Contracts" element={<ContractDashboard />} />

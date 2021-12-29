@@ -9,3 +9,9 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#567568",endCo
 .modal-container {
     z-index: 100000 !important;
 }
+#preloader {
+    z-index: 100000000 !important;
+}
+#loader {
+    z-index: 1000000000 !important;
+}
