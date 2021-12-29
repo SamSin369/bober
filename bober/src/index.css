@@ -6,3 +6,6 @@ background: -webkit-linear-gradient(315deg, rgba(86,117,104,1) 0%, rgba(176,202,
 background: linear-gradient(315deg, rgba(86,117,104,1) 0%, rgba(176,202,135,1) 100%);
 filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#567568",endColorstr="#b0ca87",GradientType=1); */
 }
+.modal-container {
+    z-index: 100000 !important;
+}
