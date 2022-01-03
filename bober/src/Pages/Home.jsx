@@ -5,7 +5,7 @@ import "../resources/videos/boberVid.mp4";
 import bgVid from "../resources/videos/boberVid.mp4";
 
 import boberLogo from "../resources/images/boberLogo.png";
-import boberContent1 from "../resources/videos/boberContent1.mp4";
+import boberContent1 from "../resources/videos/boberContentNew1.mp4";
 import boberContent2 from "../resources/videos/boberContent2.mp4";
 import boberContent3 from "../resources/videos/boberContent3.png";
 
@@ -17,6 +17,7 @@ const Home = () => {
   //     var underlines = document.querySelectorAll(".underline");
   //     var y = window.scrollY
 
+    
   //     console.log(y)
   //     if (y <= 500) {
   //         for (var i = 0; i < underlines.length; i++) {
@@ -167,12 +168,13 @@ const Home = () => {
             </video>
 
             <div className="showcase-content">
-              <p className="logo-1">
-                УЧАСТВУЙ И ПОВЫШАЙ ВЕРОЯТНОСТЬ ДАРОВ БОБРА
+              <p>
+                <h4>друг уразумей! от тебя никогда не потребуется "время" !</h4>
+                <span>УЧАСТВУЙ И ПОВЫШАЙ </span>
+                <span>ВЕРОЯТНОСТЬ ДАРОВ БОБРА </span>
+                <h4>&mdash; бабёр будет только давать дары и время . и никогда не
+                будет брат. это порядок бобра! &mdash;</h4>
               </p>
-              <h3>друг уразумей! от тебя никогда не потребуется "время" !</h3>
-              <p>бабёр будет только давать дары и время .</p>
-              <p>и никогда не будет брат. это порядок бобра!</p>
               <div id="landingBtnWrap">
                 <a
                   className="cybr-landing-btn"
@@ -194,7 +196,12 @@ const Home = () => {
               </div>
             </div>
           </header>
-            <h1 id="contentStart"><span className="highlight-text">ПЕРВЫЙ РАЗГОВОР</span> <small class="smallHeader">С ЧЕЛОВЕКОМ НОВЫМ. ЗНАКОМЫМ С ПРОЕКТОМ В ОБЩИХ ЧЕРТАХ</small></h1>
+          <h1 id="contentStart">
+            <span className="highlight-text">ПЕРВЫЙ РАЗГОВОР</span>{" "}
+            <small class="smallHeader">
+              С ЧЕЛОВЕКОМ НОВЫМ. ЗНАКОМЫМ С ПРОЕКТОМ В ОБЩИХ ЧЕРТАХ
+            </small>
+          </h1>
           <section className="style-cards">
             <div className="card-1">
               <div className="desc-1">

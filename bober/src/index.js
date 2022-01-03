@@ -15,12 +15,12 @@ import { configureStore } from "./store/configureStore";
 const store = configureStore();
 
 ReactDOM.render(
-  <React.StrictMode>
+ 
     <Provider store={store}>
       <BrowserRouter>
         <App />
       </BrowserRouter>
     </Provider>
-  </React.StrictMode>,
+  ,
   document.getElementById("root")
 );

@@ -6,7 +6,8 @@ import {
   TOGGLE_EDIT_MODAL,
   EDIT_MODAL_DATA,
   SET_DATA_CONTRACT,
-  CREATE_NEW_CONTRACT
+  CREATE_NEW_CONTRACT,
+  UPDATE_DATA_PRICE
 } from "../redux/contractConstants";
 
 export function setContractData(contracts) {
@@ -16,6 +17,9 @@ export function setContractData(contracts) {
 
 export function createNewContract(contract) {
     return {type: CREATE_CONTRACT, payload: contract}
+}
+export function updateDataPrice(contract) {
+  return {type: UPDATE_DATA_PRICE, payload: contract}
 }
 
 export function createContract(contract) {

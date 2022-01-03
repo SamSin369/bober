@@ -10,9 +10,10 @@ import {
   TOGGLE_EDIT_MODAL,
   EDIT_MODAL_DATA,
   SET_DATA_CONTRACT,
+  UPDATE_DATA_PRICE,
 } from "./contractConstants";
 const initalState = {
-  contracts: sampleData,
+  contracts: [],
   modalToggled: false,
   editModalToggled: false,
   editModalData: {},
@@ -61,11 +62,22 @@ export default function contractReducer(
         editModalData: payload,
       };
     case SET_DATA_CONTRACT:
-      console.log("payload", payload);
+ 
       return {
         ...state,
         contracts: payload,
       };
+    case UPDATE_DATA_PRICE:
+      return {
+        ...state,
+        contracts: [
+          ...state.contracts.filter(
+            (contract) => contract.REFI_NAME !== payload.REFI_NAME
+          ),
+          payload
+        ],
+
+      }
 
     default:
       return state;
@@ -78,7 +90,7 @@ export const getContracts = () => (dispatch, getState) => {
     snapshot.docs.map((document) => {
       contracts.push({ ...document.data(), id: document.id });
     });
-    console.log(contracts);
+    
     dispatch(setContractData(contracts));
   });
 };

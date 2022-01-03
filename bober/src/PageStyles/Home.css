@@ -962,3 +962,66 @@ main {
       font-weight: 500 !important;
       z-index: 10000;
   } */
+
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.3.6,
+* Autoprefixer: v10.3.1
+* Browsers: last 4 version
+*/
+
+.showcase-content p {
+    text-transform: uppercase;
+    font-size:clamp(1.8rem, 2.5vw, 2.4rem);
+    letter-spacing: 0.2em;
+    display: inline-block;
+    border: 4px double rgba(255, 255, 255, .25);
+    border-width: 4px 0;
+    padding: 1.5em 0em;
+    /* position: absolute;
+    top: 18%;
+    left: 50%;
+    width: 40em; */
+    margin: 0 0 0 -20em;
+    max-width:80%;
+}
+.showcase-content h4 {
+    font-size: clamp(1rem,2vw,2rem);
+}
+.showcase-content p span {
+    font-size: clamp(3rem, 6vw, 5rem) !important;
+    font: 700 4em "Oswald", sans-serif;
+    letter-spacing: 0;
+    padding: 0.25em 0 0.325em;
+    display: block;
+    margin: 0 auto;
+    text-shadow: 0 0 80px rgba(255, 255, 255, .5);
+   /* Clip Background Image */
+    background: url(../resources/images/newTextMove.png) repeat-y;
+    -webkit-background-clip: text;
+    background-clip: text;
+   /* Animate Background Image */
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: aitf 80s linear infinite;
+    animation: aitf 80s linear infinite;
+   /* Activate hardware acceleration for smoother animations */
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+}
+/* Animate Background Image */
+@-webkit-keyframes aitf {
+    0% {
+        background-position: 0% 50%;
+   }
+    100% {
+        background-position: 100% 50%;
+   }
+}
+@keyframes aitf {
+    0% {
+        background-position: 0% 50%;
+   }
+    100% {
+        background-position: 100% 50%;
+   }
+}

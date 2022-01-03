@@ -16,6 +16,8 @@ const ContractForm = ({ showModal, setCreateOpen }) => {
     REFI_num: "",
     REFI_name: "",
     REFI_token: "",
+    exchange_code: "",
+
     REFI_option: "",
     Spisok: "",
     Contract_Accepted: true,
@@ -126,6 +128,25 @@ const ContractForm = ({ showModal, setCreateOpen }) => {
                   type="text"
                   name="REFI_token"
                   value={values.REFI_token}
+                  onChange={(e) => handleInputChange(e)}
+                />
+                <div class="bg-top">
+                  <div class="bg-inner"></div>
+                </div>
+                <div class="bg-right">
+                  <div class="bg-inner"></div>
+                </div>
+                <div class="bg">
+                  <div class="bg-inner"></div>
+                </div>
+              </div>
+              <label for="REFI_option">Exchange Code</label>
+              <div class="control block-cube block-input">
+                <input
+                  placeholder="Exchange Code"
+                  type="text"
+                  name="exchange_code"
+                  value={values.exchange_code}
                   onChange={(e) => handleInputChange(e)}
                 />
                 <div class="bg-top">

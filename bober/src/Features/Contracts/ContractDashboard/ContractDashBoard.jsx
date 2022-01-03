@@ -5,25 +5,13 @@ import { getDocs } from "firebase/firestore";
 import { contractRef } from "../../../firestore/firestore-config";
 import "./ContractDashboard.css";
 import { CREATE_CONTRACT } from "./redux/contractConstants";
-import { createContract } from "./redux/contractActions";
 import { getContracts } from "./redux/contractReducer";
-import { Button } from "semantic-ui-react";
+import { getGoingCoinRate } from "../../../api/geckoClient";
 
 const Contracts = () => {
-  useEffect(() => {
-    dispatch(getContracts());
-  }, []);
-
-  const dispatch = useDispatch();
-
-  
-  const contractData = useSelector((state) => state.contract.contracts);
-  // const [contract, setContracts] = useState([]);
-
   return (
     <>
-      
-      <Table data={contractData} table_name={"Все Контракты"} />
+      <Table />
     </>
   );
 };
