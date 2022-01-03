@@ -28,12 +28,11 @@ const Table = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-     getContracts()
+    getContracts();
     const startProcess = async () => {
-     
       setInterval(() => {
         setLiveCoinRate();
-      }, 3000);
+      }, 6000);
     };
     startProcess();
   }, []);
@@ -79,8 +78,8 @@ const Table = () => {
   };
   let fsContracts = [];
 
-  function compare(a,b) {
-   return parseInt(a.REFI_num) - parseInt(b.REFI_num)
+  function compare(a, b) {
+    return parseInt(a.REFI_num) - parseInt(b.REFI_num);
   }
   const setLiveCoinRate = async () => {
     let coinsToSearch = [];
@@ -96,31 +95,30 @@ const Table = () => {
       }
     });
 
-    getGoingCoinRate(coinsToSearch, "usd", (res) => {
-      priceDataGecko = res.data
+    getGoingCoinRate(
+      coinsToSearch,
+      "usd",
+      (res) => {
+        priceDataGecko = res.data;
 
-      fsContracts.forEach((coin, i) => {
-   
-        // fsContracts.findIndex(fsContracts)
-       if(priceDataGecko[coin.REFI_name]) {
-        fsContracts[i].price_today  = priceDataGecko[coin.REFI_name]["usd"] 
-       } else {
-        fsContracts[i].price_today = "Ошибка"
-       }
-        
-        
-      
-      })
-   
-      fsContracts.sort(compare);
-      setLiveContracts(fsContracts)
-     
-    }, (err) => {
-      throw err
-    })
+        fsContracts.forEach((coin, i) => {
+          // fsContracts.findIndex(fsContracts)
+          if (priceDataGecko[coin.REFI_name]) {
+            fsContracts[i].price_today = priceDataGecko[coin.REFI_name]["usd"];
+          } else {
+            fsContracts[i].price_today = "Ошибка";
+          }
+        });
+
+        fsContracts.sort(compare);
+        setLiveContracts(fsContracts);
+      },
+      (err) => {
+        throw err;
+      }
+    );
 
     // console.log(coinsToSearch, "HITTING");
-
   };
 
   const getContracts = async () => {
@@ -131,15 +129,13 @@ const Table = () => {
       });
       fsContracts.sort((a, b) => parseInt(a.REFI_num) > parseInt(b.REFI_num));
       fsContracts = contracts;
-     
-      
+
       return new Promise((resolve, reject) => {
         resolve("Promise Resolved");
       });
     });
   };
 
-  
   return (
     <>
       {createOpen && (
@@ -221,55 +217,51 @@ const Table = () => {
             </tr>
           </tfoot>
           <tbody>
-            {
-              liveContracts.map((row) => (
-               
-                <tr key={row.contract_key}>
-               
-            
-                  <th scope="row">{row.REFI_num}</th>
-                  <td data-title="Имя REFI">{row.REFI_name}</td>
-                  <td data-title="Токен REFI">{row.REFI_token}</td>
-                  <td data-title="Exchange Code">{row.exchange_code}</td>
-                  <td data-title="REFI Опция" data-type="currency">
-                    {row.REFI_option}
-                  </td>
-                  <td data-title="Список" data-type="currency">
-                    {row.Spisok}
-                  </td>
-                  <td data-title="Контракт Принят" data-type="currency">
-                    {row.Contract_Accepted ? "Да" : "Нет"}
-                  </td>
-                  <td data-title="Ценв Опции" data-type="currency">
-                    {row.option_price}
-                  </td>
-                  <td data-title="Цена Сегодня" data-type="currency">
-                    {row.price_today}
-                  </td>
+            {liveContracts.map((row) => (
+              <tr key={row.contract_key}>
+                <th scope="row">{row.REFI_num}</th>
+                <td data-title="Имя REFI">{row.REFI_name}</td>
+                <td data-title="Токен REFI">{row.REFI_token}</td>
+                <td data-title="Exchange Code">{row.exchange_code}</td>
+                <td data-title="REFI Опция" data-type="currency">
+                  {row.REFI_option}
+                </td>
+                <td data-title="Список" data-type="currency">
+                  {row.Spisok}
+                </td>
+                <td data-title="Контракт Принят" data-type="currency">
+                  {row.Contract_Accepted ? "Да" : "Нет"}
+                </td>
+                <td data-title="Ценв Опции" data-type="currency">
+                  {row.option_price}
+                </td>
+                <td data-title="Цена Сегодня" data-type="currency">
+                  {row.price_today}
+                </td>
 
-                  <td data-title="Инвестиция" data-type="currency">
-                    {row.investment}
-                  </td>
-                  <td data-title="Наши Токены" data-type="currency">
-                    {row.our_tokens}
-                  </td>
-                  <td data-title="Возможные Токены" data-type="currency">
-                    {row.total_possible}
-                  </td>
-                  <td data-title="Управление Контрактом">
-                    <Button
-                      onClick={() => handleDelete(row)}
-                      color="red"
-                      icon="trash"
-                    />
-                    <Button
-                      onClick={() => handleEdit(row)}
-                      color="grey"
-                      icon="edit"
-                    />
-                  </td>
-                </tr>
-              ))}
+                <td data-title="Инвестиция" data-type="currency">
+                  {row.investment}
+                </td>
+                <td data-title="Наши Токены" data-type="currency">
+                  {row.our_tokens}
+                </td>
+                <td data-title="Возможные Токены" data-type="currency">
+                  {row.total_possible}
+                </td>
+                <td data-title="Управление Контрактом">
+                  <Button
+                    onClick={() => handleDelete(row)}
+                    color="red"
+                    icon="trash"
+                  />
+                  <Button
+                    onClick={() => handleEdit(row)}
+                    color="grey"
+                    icon="edit"
+                  />
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
