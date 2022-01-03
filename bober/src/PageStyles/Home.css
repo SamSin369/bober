@@ -292,6 +292,10 @@ main {
 .video-2 {
     width: 100%;
 }
+.video-3 {
+    z-index: 1000000;
+    width:100%;
+}
 
 .card-3 {
     position: relative;
@@ -300,6 +304,10 @@ main {
     text-align: left;
     align-items: center;
     padding: 25px 45px 50px;
+}
+.card-3 video {
+    z-index: 1000000;
+    width:100%;
 }
 
 .desc-3 {
@@ -312,17 +320,10 @@ main {
     grid-column: 2/2;
     grid-row: 1/2;
 }
-
-.card-3 video {
-    position: relative;
-    top: -87px;
-    left: 125px;
-    width: 65%;
-    height: 78%;
-    grid-column: 2/2;
-    grid-row: 1/2;
-    z-index: -1;
+.style-cards video {
+    max-width: 400px;
 }
+
 
 .faq {
     text-align: center;

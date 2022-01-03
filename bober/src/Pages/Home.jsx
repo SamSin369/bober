@@ -7,7 +7,7 @@ import bgVid from "../resources/videos/boberVid.mp4";
 import boberLogo from "../resources/images/boberLogo.png";
 import boberContent1 from "../resources/videos/boberContentNew1.mp4";
 import boberContent2 from "../resources/videos/boberContent2.mp4";
-import boberContent3 from "../resources/videos/boberContent3.png";
+import boberContent3 from "../resources/videos/boberContent3.mp4";
 
 import { Accordion, AccordionItem } from "../components/Accordion/Accordion";
 
@@ -205,10 +205,9 @@ const Home = () => {
           <section className="style-cards">
             <div className="card-1">
               <div className="desc-1">
-                <h1 className="glower logo-1">Участвуй На Любом Устройстве</h1>
+                <h1 className="glower logo-1"><span className="highlight-text">Участвуй</span> На Любом Устройстве</h1>
                 <h3>
-                  Регистрируйся, участвуй, и получай деньги в любом точке мира в
-                  любое время!
+                  Регистрируйся, участвуй, и приноси пользу себе и другим
                 </h3>
               </div>
 
@@ -221,23 +220,24 @@ const Home = () => {
                 <source src={boberContent2} type="video/mp4" />
               </video>
               <div className="desc-2">
-                <h1 className="glower logo-1">Это Проше Чем 1-2-3</h1>
+                <h1 className="glower logo-1">Это <span className="highlight-text">Проше</span> Чем 1-2-3</h1>
                 <h3>
-                  Регистрируйся, участвуй, и полчи деньги это реально так просто
+                  Регистрируйся, участвуй, и полчи дары от бобра
                 </h3>
               </div>
             </div>
             <div className="card-3">
               <div className="desc-3">
                 <h1 className="glower logo-1">
-                  Выводи Криптовалюту В Наличные Деньги
+                  <span class="highlighted-text">Помогай</span> всем остальным участникам включая себя
                 </h1>
                 <h3>
-                  Ваше деньги хранятся у вас на личном кошелке в безопасном
-                  месте
+                  Ваше действие помогут финансова вам и тем кто в этом нуждается
                 </h3>
               </div>
-              <img src={boberContent3} alt="Device-Pile-In" />
+              <video className="video-1" autoPlay playsInline muted loop>
+                <source src={boberContent3} type="video/mp4" />
+              </video>
             </div>
           </section>
           <section className="lastsec">
