@@ -99,8 +99,12 @@ const Table = () => {
       fsContracts.forEach((coin, i) => {
    
         // fsContracts.findIndex(fsContracts)
-        console.log(priceDataGecko[coin.REFI_name]["usd"])
+       if(priceDataGecko[coin.REFI_name]["usd"]) {
         fsContracts[i].price_today  = priceDataGecko[coin.REFI_name]["usd"] 
+       } else {
+        fsContracts[i].price_today = "Ошибка"
+       }
+        
         
       
       })
