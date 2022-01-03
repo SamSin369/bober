@@ -77,8 +77,11 @@ const Table = () => {
 
     dispatch(deleteContract(data.contract_key));
   };
-  let fsContracts;
+  let fsContracts = [];
 
+  function compare(a,b) {
+   return parseInt(a.REFI_num) - parseInt(b.REFI_num)
+  }
   const setLiveCoinRate = async () => {
     let coinsToSearch = [];
     let arrayToState = [];
@@ -108,7 +111,8 @@ const Table = () => {
         
       
       })
-      console.log("UPDATED CONTRACTS",fsContracts)
+   
+      fsContracts.sort(compare);
       setLiveContracts(fsContracts)
      
     }, (err) => {
@@ -117,7 +121,6 @@ const Table = () => {
 
     // console.log(coinsToSearch, "HITTING");
 
-    console.log("CONTRACT IN FUNC", fsContracts);
   };
 
   const getContracts = async () => {
@@ -126,7 +129,9 @@ const Table = () => {
       snapshot.docs.forEach((document) => {
         contracts.push({ ...document.data(), id: document.id });
       });
+      fsContracts.sort((a, b) => parseInt(a.REFI_num) > parseInt(b.REFI_num));
       fsContracts = contracts;
+     
       
       return new Promise((resolve, reject) => {
         resolve("Promise Resolved");
@@ -134,7 +139,7 @@ const Table = () => {
     });
   };
 
-  console.log("PLEASE", liveContracts)
+  
   return (
     <>
       {createOpen && (
@@ -221,7 +226,7 @@ const Table = () => {
                
                 <tr key={row.contract_key}>
                
-               {console.log("ROW COIMG", row)}
+            
                   <th scope="row">{row.REFI_num}</th>
                   <td data-title="Имя REFI">{row.REFI_name}</td>
                   <td data-title="Токен REFI">{row.REFI_token}</td>
