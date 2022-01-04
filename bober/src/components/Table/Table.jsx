@@ -15,7 +15,9 @@ import EditContractForm from "../Forms/EditContract/EditContractForm";
 import axios from "axios";
 import { getGoingCoinRate } from "../../api/geckoClient";
 import Modal from "../Modal/Modal";
+import { updateLoading } from "../../store/global-state/globalActions";
 const Table = () => {
+  const dispatch = useDispatch();
   const [coinPriceData, setCoinPriceData] = useState([]);
   const [liveContracts, setLiveContracts] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
@@ -27,10 +29,11 @@ const Table = () => {
 
   const [editData, setEditData] = useState();
 
-  const dispatch = useDispatch();
+ 
 
   useEffect(() => {
     getContracts();
+    dispatch(updateLoading(true))
     const startProcess = async () => {
       setInterval(() => {
         setLiveCoinRate();
@@ -115,10 +118,10 @@ const Table = () => {
 
         let total = 0;
         fsContracts.forEach((contract) => {
-          console.log(contract);
+         
 
           if (contract.price_today * contract.our_tokens) {
-            total += contract.price_today * contract.our_tokens;
+            total += Math.round(contract.price_today * contract.our_tokens);
           } else {
             total += 0;
           }
@@ -130,6 +133,7 @@ const Table = () => {
 
         fsContracts.sort(compare);
         setLiveContracts(fsContracts);
+        dispatch(updateLoading(false))
       },
       (err) => {
         throw err;
@@ -144,6 +148,7 @@ const Table = () => {
   };
 
   const getContracts = async () => {
+    console.log("CONTRACTS HAVE BEEN EXECUTED")
     let contracts = [];
     getDocs(contractRef).then((snapshot) => {
       snapshot.docs.forEach((document) => {
@@ -266,7 +271,7 @@ const Table = () => {
                   {row.option_price}
                 </td>
                 <td data-title="Цена Сегодня" data-type="currency">
-                  {row.price_today ? row.price_today : 0}
+                  {row.price_today ? "$" + row.price_today : 0}
                 </td>
 
                 <td data-title="Инвестиция" data-type="currency">
@@ -282,7 +287,7 @@ const Table = () => {
                 </td>
                 <td data-title="Итого" data-type="currency">
                   {row.our_tokens * row.price_today
-                    ? row.our_tokens * row.price_today
+                    ? "$" + Math.round(row.our_tokens * row.price_today)
                     : 0}
                 </td>
                 <td data-title="Управление Контрактом">
