@@ -18,7 +18,7 @@ import Modal from "../Modal/Modal";
 const Table = () => {
   const [coinPriceData, setCoinPriceData] = useState([]);
   const [liveContracts, setLiveContracts] = useState([]);
-  const [totalAmount, setTotalAmount] = useState()
+  const [totalAmount, setTotalAmount] = useState(0);
 
   const [apiCall, setApiCall] = useState(null);
 
@@ -36,6 +36,7 @@ const Table = () => {
         setLiveCoinRate();
       }, 6000);
     };
+
     startProcess();
   }, []);
 
@@ -112,6 +113,21 @@ const Table = () => {
           }
         });
 
+        let total = 0;
+        fsContracts.forEach((contract) => {
+          console.log(contract);
+
+          if (contract.price_today * contract.our_tokens) {
+            total += contract.price_today * contract.our_tokens;
+          } else {
+            total += 0;
+          }
+
+          // setTotalAmount(prevstate => prevstate + (contract.price_today * contract.our_tokens) )
+        });
+
+        setTotalAmount(total);
+
         fsContracts.sort(compare);
         setLiveContracts(fsContracts);
       },
@@ -119,9 +135,11 @@ const Table = () => {
         throw err;
       }
     );
-    getTotal()
-   
-   
+
+    return new Promise((resolve, reject) => {
+      resolve("Promise Resolved");
+    });
+
     // console.log(coinsToSearch, "HITTING");
   };
 
@@ -139,28 +157,7 @@ const Table = () => {
       });
     });
   };
-  const getTotal = () => {
-    let total = 0
-    liveContracts.forEach((contract) => {
-      console.log(contract)
-   
-      if (contract.price_today * contract.our_tokens) {
-        total += (contract.price_today * contract.our_tokens)
-      } else {
-        total += 0
-      }
-  
-      // setTotalAmount(prevstate => prevstate + (contract.price_today * contract.our_tokens) )
-    })
-   
-
-    setTotalAmount(total)
-  
-  }
-
-
-  
-  console.log("TOTAL", totalAmount)
+  const getTotal = () => {};
 
   return (
     <>
@@ -214,12 +211,11 @@ const Table = () => {
           />
         </div>
       </div>
-      <h1 id="sumStyle">Полная Сумма: {totalAmount}</h1>
+      <h1 id="sumStyle">Полная Сумма: ${totalAmount}</h1>
       <div className="table-container">
-     
         <table className="responsive-table">
           <caption>Contract Table</caption>
-          
+
           <thead>
             <tr>
               <th scope="col">Number</th>
@@ -270,7 +266,7 @@ const Table = () => {
                   {row.option_price}
                 </td>
                 <td data-title="Цена Сегодня" data-type="currency">
-                  {row.price_today? row.price_today : 0}
+                  {row.price_today ? row.price_today : 0}
                 </td>
 
                 <td data-title="Инвестиция" data-type="currency">
@@ -280,10 +276,14 @@ const Table = () => {
                   {row.our_tokens}
                 </td>
                 <td data-title="Возможные Токены" data-type="currency">
-                  {row.total_possible !== "" ? row.total_possible : "Нет Данных"}
+                  {row.total_possible !== ""
+                    ? row.total_possible
+                    : "Нет Данных"}
                 </td>
                 <td data-title="Итого" data-type="currency">
-                  {(row.our_tokens * row.price_today) ? (row.our_tokens * row.price_today) : 0 }
+                  {row.our_tokens * row.price_today
+                    ? row.our_tokens * row.price_today
+                    : 0}
                 </td>
                 <td data-title="Управление Контрактом">
                   <Button
