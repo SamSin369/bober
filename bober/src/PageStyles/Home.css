@@ -322,6 +322,7 @@ main {
 }
 .style-cards video {
     max-width: 400px;
+    margin: auto;
 }
 
 

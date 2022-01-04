@@ -305,5 +305,9 @@
 #search-btn-wrap {
     display:flex;
 }
+#sumStyle {
+	text-align: center;
+    padding: 30px;
+}
  
  

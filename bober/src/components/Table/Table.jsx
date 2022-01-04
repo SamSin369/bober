@@ -14,9 +14,11 @@ import ContractForm from "../Forms/CreateContract/ContractForm";
 import EditContractForm from "../Forms/EditContract/EditContractForm";
 import axios from "axios";
 import { getGoingCoinRate } from "../../api/geckoClient";
+import Modal from "../Modal/Modal";
 const Table = () => {
   const [coinPriceData, setCoinPriceData] = useState([]);
   const [liveContracts, setLiveContracts] = useState([]);
+  const [totalAmount, setTotalAmount] = useState()
 
   const [apiCall, setApiCall] = useState(null);
 
@@ -86,7 +88,7 @@ const Table = () => {
     let arrayToState = [];
     let priceDataGecko = [];
 
-    await getContracts();
+    // await getContracts();
 
     fsContracts.forEach((coin) => {
       arrayToState.push(coin);
@@ -117,7 +119,9 @@ const Table = () => {
         throw err;
       }
     );
-
+    getTotal()
+   
+   
     // console.log(coinsToSearch, "HITTING");
   };
 
@@ -135,9 +139,35 @@ const Table = () => {
       });
     });
   };
+  const getTotal = () => {
+    let total = 0
+    liveContracts.forEach((contract) => {
+      console.log(contract)
+   
+      if (contract.price_today * contract.our_tokens) {
+        total += (contract.price_today * contract.our_tokens)
+      } else {
+        total += 0
+      }
+  
+      // setTotalAmount(prevstate => prevstate + (contract.price_today * contract.our_tokens) )
+    })
+   
+
+    setTotalAmount(total)
+  
+  }
+
+
+  
+  console.log("TOTAL", totalAmount)
 
   return (
     <>
+      {/* <Modal>
+        <h2>10% off Coupon Code</h2>
+        <p>Use code blah blah blah at checkout</p>
+      </Modal> */}
       {createOpen && (
         <ContractForm createOpen={createOpen} setCreateOpen={setCreateOpen} />
       )}
@@ -184,9 +214,12 @@ const Table = () => {
           />
         </div>
       </div>
+      <h1 id="sumStyle">Полная Сумма: {totalAmount}</h1>
       <div className="table-container">
+     
         <table className="responsive-table">
           <caption>Contract Table</caption>
+          
           <thead>
             <tr>
               <th scope="col">Number</th>
@@ -202,6 +235,7 @@ const Table = () => {
               <th scope="col">Инвестиция</th>
               <th scope="col">Наши Токены</th>
               <th scope="col">Возможных Токенов</th>
+              <th scope="col">Итого</th>
               <th scope="col">Управление Контрактом</th>
             </tr>
             {/* {data.map(title => {
@@ -236,7 +270,7 @@ const Table = () => {
                   {row.option_price}
                 </td>
                 <td data-title="Цена Сегодня" data-type="currency">
-                  {row.price_today}
+                  {row.price_today? row.price_today : 0}
                 </td>
 
                 <td data-title="Инвестиция" data-type="currency">
@@ -246,7 +280,10 @@ const Table = () => {
                   {row.our_tokens}
                 </td>
                 <td data-title="Возможные Токены" data-type="currency">
-                  {row.total_possible}
+                  {row.total_possible !== "" ? row.total_possible : "Нет Данных"}
+                </td>
+                <td data-title="Итого" data-type="currency">
+                  {(row.our_tokens * row.price_today) ? (row.our_tokens * row.price_today) : 0 }
                 </td>
                 <td data-title="Управление Контрактом">
                   <Button
