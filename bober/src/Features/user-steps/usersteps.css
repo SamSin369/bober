@@ -1,0 +1,124 @@
+
+  .warning{
+    color: rgb(62,148,236);
+  }
+  .st_viewport{
+    max-height: 500px;
+    overflow: auto;
+  }
+  
+  [data-table_id="1"]{
+    background-color: rgb(255,115,0);
+  }
+  [data-table_id="2"]{
+    background-color: rgb(61,53,39);
+    color: rgb(220,220,220);
+  }
+  [data-table_id="3"]{
+    background-color: rgba(168,189,4, .8);
+  }
+  
+  ._rank{
+    min-width: 80px;
+  }
+  ._id{
+    min-width: 60px;
+  }
+  ._name{
+    min-width: 130px;
+  }
+  ._surname{
+    min-width: 130px;
+  }
+  ._year{
+    min-width: 80px;
+  }
+  ._section{
+    min-width: 130px;
+  }
+  
+  pre{
+    overflow: auto;
+  }
+  
+  /** Sticky table styles **/
+  .st_viewport{
+    background-color: rgb(62,148,236);
+    color: rgb(27,30,36);
+    margin: 20px 0;
+    max-height: 80vh;
+    overflow: auto;
+    max-width: 80vw;
+    margin: auto;
+    font-size:1.6rem;
+  }
+  /* ###  Table wrap */
+  .st_wrap_table{
+    
+  }
+  /* ##   header */
+  .st_table_header{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0px;
+    z-index: 1;
+    background-color: rgb(27,30,36);
+    color: rgb(220,220,220);
+  }
+  .st_table_header h2{
+    font-weight: 400;
+    font-size: 2rem;
+   
+    text-align: center;
+    padding: 30px 0;
+    /* margin-bottom: 10px; */
+  }
+  .st_table_header .st_row{
+    color: rgba(220,220,220, .7);
+  }
+  .st_table_header .st_column{
+    
+  }
+  /* ##  table */
+  .st_table{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  /* #   row */
+  .st_row{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0;
+  }
+  .st_table .st_row:nth-child(even){
+    background-color: rgba(0,0,0, .1)
+  }
+  /* #   column */
+  .st_column{
+    padding: 10px 20px;
+  }
+  #userTable h1 {
+    text-align: center;
+    /* margin: 40px 0; */
+    font-size: 3.8rem;
+    font-style: italic;
+    font-weight: bold;
+    margin-top: 100px;
+    margin-bottom: 49px;
+  }
+  #addStepBtn {
+    position: absolute;
+    right: 0;
+    top: 38px;
+    left: 20px;
+  }

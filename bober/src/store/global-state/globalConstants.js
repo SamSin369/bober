@@ -1,1 +1,3 @@
 export const SET_LOADER_VALUE = "SET_LOADER_VALUE"
+export const SET_LOGIN_USER = "SET_LOGIN_USER"
+export const SET_LOGOUT_USER = "SET_LOGOUT_USER"
