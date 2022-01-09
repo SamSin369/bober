@@ -54,7 +54,7 @@ const LoginForm = () => {
       <div class="form-wrap">
         <div class="hit-the-floor">Вход!</div>
 
-        <form class="form" onSubmit={handleSubmit}>
+        <form class="form" id="altForm" onSubmit={handleSubmit}>
           <div class="control"></div>
           <div class="control block-cube block-input">
             <input

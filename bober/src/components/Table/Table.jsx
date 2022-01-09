@@ -162,7 +162,7 @@ const Table = () => {
       });
     });
   };
-  const getTotal = () => {};
+ 
 
   return (
     <>

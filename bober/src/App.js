@@ -7,6 +7,8 @@ import UserLogin from "./Features/Login/LoginForm.jsx";
 import Sandbox from "./Features/Sandbox/Sandbox.jsx";
 import Loader from "./components/Loader/Loader";
 import { useSelector } from "react-redux";
+import UserSteps from "./Features/user-steps/UserSteps";
+import StepsDetailedPage from "./Features/user-steps/steps-detailed/StepsDetailedPage";
 function App() {
 
   const isLoading = useSelector(state => state.global.loading)
@@ -21,6 +23,8 @@ function App() {
         <Route path="/Contracts" element={<ContractDashboard />} />
         <Route path="/SandBox" element={<Sandbox />} />
         <Route path="/Login" element={<UserLogin />} />
+        <Route path="/Steps" element={<UserSteps/>} />
+        <Route path="/Steps/1" element={<StepsDetailedPage/>}/>
       </Routes>
     </>
   );
