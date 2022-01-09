@@ -19,7 +19,7 @@ body {
 h1 {
   font-size: 23px;
 }
-.form {
+#formAlt {
   width: 300px;
   padding: 64px 15px 24px;
   margin: 0 auto;

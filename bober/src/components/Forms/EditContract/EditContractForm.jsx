@@ -58,7 +58,7 @@ const EditContractForm = ({ editData, editOpen, setEditOpen }) => {
           <div class="form-wrap">
             <div class="hit-the-floor">Изменить Контракт!</div>
 
-            <form class="form" onSubmit={handleSubmit}>
+            <form class="form" id="formAlt"onSubmit={handleSubmit}>
               <div class="control"></div>
               <label for="REFI_num">Номер REFI</label>
 
