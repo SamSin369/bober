@@ -153,7 +153,9 @@ const Table = () => {
     getDocs(contractRef).then((snapshot) => {
       snapshot.docs.forEach((document) => {
         contracts.push({ ...document.data(), id: document.id });
-      });
+      }).catch(err => {
+        console.log("ERROR", err)
+      })
       fsContracts.sort((a, b) => parseInt(a.REFI_num) > parseInt(b.REFI_num));
       fsContracts = contracts;
 

@@ -95,6 +95,7 @@ const CreateStep = () => {
                       <div class="bg-inner"></div>
                     </div>
                   </div>
+                  <input type="date" placeholder="Дата"/>
 
                   <button
                     class="btn block-cube block-cube-hover"
