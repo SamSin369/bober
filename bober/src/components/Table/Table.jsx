@@ -216,7 +216,7 @@ const Table = () => {
           />
         </div>
       </div>
-      <h1 id="sumStyle">Полная Сумма: Д{totalAmount * 78.19}</h1>
+      <h1 id="sumStyle">Полная Сумма: Д б.{totalAmount * 78.19}</h1>
       <div className="table-container">
         <table className="responsive-table">
           <caption>Contract Table</caption>
