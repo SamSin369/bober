@@ -9,6 +9,7 @@ import Loader from "./components/Loader/Loader";
 import { useSelector } from "react-redux";
 import UserSteps from "./Features/user-steps/UserSteps";
 import StepsDetailedPage from "./Features/user-steps/steps-detailed/StepsDetailedPage";
+import Dashboard from "./components/Dashboard/Dashboard";
 function App() {
 
   const isLoading = useSelector(state => state.global.loading)
@@ -20,6 +21,8 @@ function App() {
  
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/Dashboard" element={<Dashboard/>}/>
+        <Route path="/Contract/Details/:contractId" element={<Dashboard />}/>
         <Route path="/Contracts" element={<ContractDashboard />} />
         <Route path="/SandBox" element={<Sandbox />} />
         <Route path="/Login" element={<UserLogin />} />

@@ -16,6 +16,7 @@ import axios from "axios";
 import { getGoingCoinRate } from "../../api/geckoClient";
 import Modal from "../Modal/Modal";
 import { updateLoading } from "../../store/global-state/globalActions";
+import { Link } from "react-router-dom";
 const Table = () => {
   const dispatch = useDispatch();
   const [coinPriceData, setCoinPriceData] = useState([]);
@@ -29,11 +30,9 @@ const Table = () => {
 
   const [editData, setEditData] = useState();
 
- 
-
   useEffect(() => {
     getContracts();
-    dispatch(updateLoading(true))
+    dispatch(updateLoading(true));
     const startProcess = async () => {
       setInterval(() => {
         setLiveCoinRate();
@@ -43,7 +42,9 @@ const Table = () => {
     startProcess();
   }, []);
 
-  let theContracts = [];
+  const viewDetails = (id) => {
+    console.log("ID ID", id);
+  };
 
   // const getFSContracts = async () => {
   //   console.log("AJKSBNCKJASBCKJASB");
@@ -118,8 +119,6 @@ const Table = () => {
 
         let total = 0;
         fsContracts.forEach((contract) => {
-         
-
           if (contract.price_today * contract.our_tokens) {
             total += Math.round(contract.price_today * contract.our_tokens);
           } else {
@@ -133,7 +132,7 @@ const Table = () => {
 
         fsContracts.sort(compare);
         setLiveContracts(fsContracts);
-        dispatch(updateLoading(false))
+        dispatch(updateLoading(false));
       },
       (err) => {
         throw err;
@@ -148,12 +147,12 @@ const Table = () => {
   };
 
   const getContracts = async () => {
-    console.log("CONTRACTS HAVE BEEN EXECUTED")
+    console.log("CONTRACTS HAVE BEEN EXECUTED");
     let contracts = [];
     getDocs(contractRef).then((snapshot) => {
       snapshot.docs.forEach((document) => {
         contracts.push({ ...document.data(), id: document.id });
-      })
+      });
       fsContracts.sort((a, b) => parseInt(a.REFI_num) > parseInt(b.REFI_num));
       fsContracts = contracts;
 
@@ -162,7 +161,6 @@ const Table = () => {
       });
     });
   };
- 
 
   return (
     <>
@@ -301,6 +299,9 @@ const Table = () => {
                     color="grey"
                     icon="edit"
                   />
+                  <Link to={`/Contract/Details/${row.id}`}>
+                    <Button color="green" icon="angle double right" />
+                  </Link>
                 </td>
               </tr>
             ))}
