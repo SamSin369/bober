@@ -19,7 +19,26 @@ import moment from "moment";
 const Dashboard = () => {
   const [editOpen, setEditOpen] = useState(false);
   const [detailedData, setDetailedData] = useState({});
-  const [editDetailedData, setEditDetailedData] = useState(defaultData);
+  const [editDetailedData, setEditDetailedData] = useState( {
+    "supplyForSale": 0,
+    "fixedSalePrice": 0,
+    "purchaseLimitsMax": 0,
+    "numberOfTokens": 0,
+    "registrationOpens": Date.now(),
+    "registrationEnds": Date.now(),
+    "salePeriodStart": Date.now(),
+    "salePeriodEnd": Date.now(),
+    "lockupAndRelease": {
+        "numberOfParts": 0,
+        "dates": [Date.now()],
+        "numberOfTokens": 0
+
+    },
+    "participantNumber": 0,
+    "numberOfContracts":0,
+    "investmentAmount": 0,
+    "totalNumberOfTokens": 0,
+});
 
   const [contractInfo, setContactInfo] = useState([]);
   const { contractId } = useParams();
@@ -47,12 +66,14 @@ const Dashboard = () => {
   const getDetailedInfo = async () => {
     const docRef = doc(db, "events", contractId);
     const docSnap = await getDoc(docRef);
+    console.log(docSnap.data(), "DOCK SNAP")
+    console.log("STATUS OF DOC", docSnap.exists())
 
-    if (!docSnap.exists()) {
+    if (!docSnap.data().editDetailedData) {
       console.log("docsnap not here");
       setEditDetailedData(defaultData);
       updateDoc(docRef, {
-        editDetailedData,
+        editDetailedData: defaultData,
       })
         .then(function () {
           console.log("Update Successful");
@@ -316,7 +337,7 @@ const Dashboard = () => {
           <li class="table-row">
             <div class="col col-1">12</div>
             <div class="col col-2">общее количество токенов </div>
-            <div class="col col-3">$115</div>
+            <div class="col col-3">{editDetailedData.totalNumberOfTokens}</div>
             <div class="col col-4">
               <Button
                 onClick={() =>
