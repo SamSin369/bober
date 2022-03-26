@@ -25,7 +25,7 @@ export const allCoinsGecko = () => {
       return err;
     });
 };
-
+var array = ["asdc", "asdadss"]
 export const getGoingCoinRate = async (coinnames, convertTo, cb, errcb) => {
   let coinQuery = "";
   console.log(coinnames);

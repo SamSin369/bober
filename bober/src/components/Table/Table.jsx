@@ -283,6 +283,7 @@ const Table = () => {
                     ? row.total_possible
                     : "Нет Данных"}
                 </td>
+            
                 <td data-title="Итого" data-type="currency">
                   {row.our_tokens * row.price_today
                     ? "$" + Math.round(row.our_tokens * row.price_today)
