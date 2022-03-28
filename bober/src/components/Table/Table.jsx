@@ -223,7 +223,7 @@ const Table = () => {
             <tr>
               <th scope="col">Number</th>
               <th scope="col">Name</th>
-              <th scope="col">Token</th>
+              <th scope="col">Token</th>  
               <th scope="col">Exchange Code</th>
               <th scope="col">Option</th>
               <th scope="col">Список</th>

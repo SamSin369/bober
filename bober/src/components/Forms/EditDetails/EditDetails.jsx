@@ -8,7 +8,7 @@ import { doc, setDoc, updateDoc } from "firebase/firestore";
 import { contractRef, db } from "../../../firestore/firestore-config";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
+import moment from "moment"
 const EditDetailsForm = ({
   detailedData,
   editOpen,
@@ -18,6 +18,8 @@ const EditDetailsForm = ({
  
 
   const [values, setValues] = useState(detailedData);
+
+  
 
 
 
@@ -58,20 +60,25 @@ const EditDetailsForm = ({
   }
 
   function handleDate(date) {
-    console.log(date, "DATE");
-    console.log("CONVERTED DATA", date.getTime() / 1000 )
+    moment(Date.now(), 'DD-MM-YYYY')
+    var someDate = new Date(date);
+    someDate = 
     setValues((prevState) => ({
       ...prevState,
-      ["data"]: date.getTime() / 1000,
+      ["data"]: someDate.getTime()
     }));
+    console.log(values.keyName, values.data, "BEFORE SET")
     setEditDetailedData((prevState) => ({
       ...prevState,
       [values.keyName]: values.data,
     }));
+ 
     
 
   }
-
+console.log(values.data, "DATA DATA")
+  console.log("Moment", moment(values.data)._d)
+ 
   return (
     <div class="box">
       <div class={editOpen ? "active modal-container" : "modal-container"}>
@@ -106,8 +113,10 @@ const EditDetailsForm = ({
               ) : (
                 <div>
                   <DatePicker
-                    onChange={handleDate}
+                    onChange={(startDate) => handleDate(startDate)}
                     selected={values.data}
+                    name={values.keyName}
+                  
                     showTimeSelect
                     dateFormat="Pp"
                   />

@@ -24,13 +24,13 @@ const Dashboard = () => {
     "fixedSalePrice": 0,
     "purchaseLimitsMax": 0,
     "numberOfTokens": 0,
-    "registrationOpens": Date.now(),
-    "registrationEnds": Date.now(),
-    "salePeriodStart": Date.now(),
-    "salePeriodEnd": Date.now(),
+    "registrationOpens": moment(Date.now(), 'DD-MM-YYYY'),
+    "registrationEnds": moment(Date.now(), 'DD-MM-YYYY'),
+    "salePeriodStart": moment(Date.now(), 'DD-MM-YYYY'),
+    "salePeriodEnd": moment(Date.now(), 'DD-MM-YYYY'),
     "lockupAndRelease": {
         "numberOfParts": 0,
-        "dates": [Date.now()],
+        "dates": [moment(Date.now(), 'DD-MM-YYYY')],
         "numberOfTokens": 0
 
     },
