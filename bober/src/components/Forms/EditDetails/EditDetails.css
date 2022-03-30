@@ -307,7 +307,7 @@
     position: relative;
     overflow: scroll;
     overflow-x: hidden;
-    height: 50%;
+    height: 80%;
   
   }
   
@@ -549,4 +549,11 @@
   #mtop {
     margin-top:10px !important;
   }
-  
+  #contractDetails {
+    width: 100%;
+    height: 200px;
+    font-size:1.6rem;
+  }
+  #m-topper {
+    margin:44px;
+  }

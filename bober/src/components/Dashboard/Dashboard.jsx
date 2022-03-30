@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Dashboard.css";
-import 'moment/locale/ru';
+import "moment/locale/ru";
 import { contractRef, db } from "../../firestore/firestore-config";
 import {
   deleteDoc,
@@ -13,52 +13,116 @@ import {
 
 import { useParams } from "react-router-dom";
 import { defaultData } from "../../data/defaultDetails";
-import { Button } from "semantic-ui-react";
+import { Button, Icon } from "semantic-ui-react";
 import EditDetailsForm from "../Forms/EditDetails/EditDetails";
 import moment from "moment";
 const Dashboard = () => {
   const [editOpen, setEditOpen] = useState(false);
   const [detailedData, setDetailedData] = useState({});
-  const [editDetailedData, setEditDetailedData] = useState( {
-    "supplyForSale": 0,
-    "fixedSalePrice": 0,
-    "purchaseLimitsMax": 0,
-    "numberOfTokens": 0,
-    "registrationOpens": moment(Date.now(), 'DD-MM-YYYY'),
-    "registrationEnds": moment(Date.now(), 'DD-MM-YYYY'),
-    "salePeriodStart": moment(Date.now(), 'DD-MM-YYYY'),
-    "salePeriodEnd": moment(Date.now(), 'DD-MM-YYYY'),
-    "lockupAndRelease": {
-        "numberOfParts": 0,
-        "dates": [moment(Date.now(), 'DD-MM-YYYY')],
-        "numberOfTokens": 0
-
+  const [editDetailedData, setEditDetailedData] = useState({
+    supplyForSale: 0,
+    fixedSalePrice: 0,
+    purchaseLimitsMax: 0,
+    numberOfTokensInOneContract: 0,
+    registrationOpens: moment(Date.now(), "DD-MM-YYYY"),
+    registrationEnds: moment(Date.now(), "DD-MM-YYYY"),
+    salePeriodStart: moment(Date.now(), "DD-MM-YYYY"),
+    salePeriodEnd: moment(Date.now(), "DD-MM-YYYY"),
+    lockupAndRelease: {
+      text: "",
+      numberOfParts: 4,
+      dates: {
+        0: Date.now(),
+        1: Date.now(),
+        2: Date.now(),
+      },
+      numberOfTokens: 400,
     },
-    "participantNumber": 0,
-    "numberOfContracts":0,
-    "investmentAmount": 0,
-    "totalNumberOfTokens": 0,
-});
+    participantNumber: 0,
+    numberOfContracts: 0,
+    investmentAmount: 0,
+    totalNumberOfTokens: 0,
+  });
+
 
   const [contractInfo, setContactInfo] = useState([]);
   const { contractId } = useParams();
+  // const resetData = async ()  => {
+  //   console.log("AAA")
+  //   const docRef = doc(db, "events", contractId);
+  
+       
+        
+    
+  //       await updateDoc(docRef, {
+  //         editDetailedData: {
+  //           supplyForSale: 0,
+  //           fixedSalePrice: 0,
+  //           purchaseLimitsMax: 0,
+  //           numberOfTokensInOneContract: 0,
+  //           registrationOpens: Date.now(), 
+  //           registrationEnds: Date.now(), 
+  //           salePeriodStart: Date.now(), 
+  //           salePeriodEnd: Date.now(), 
+  //           lockupAndRelease: {
+  //             text: "",
+  //             numberOfParts: 4,
+  //             dates: Date.now(),
+  //             numberOfTokens: 400,
+  //           },
+  //           participantNumber: 0,
+  //           numberOfContracts: 0,
+  //           investmentAmount: 0,
+  //           totalNumberOfTokens: 0,
+  //         }
+  //   })
+  // }
+ 
   useEffect(() => {
+    // resetData();
     getDetailedInfo();
-    console.log(moment.locales())
-    moment.locale('ru')
+    console.log(moment.locales());
+    moment.locale("ru");
     var localLocale = moment();
-    console.log(moment().format('LLLL'));
-    console.log(moment.locales())
+    console.log(moment().format("LLLL"));
+    console.log(moment.locales());
   }, []);
 
-  const handleEdit = (name, data, keyName, isDate) => {
-    const readyData = {
-      name: name,
-      data: data,
-      contract: contractId,
-      keyName,
-      isDate,
-    };
+  const handleEdit = (multipleParams, name, data, keyName, isDate, index) => {
+    let readyData;
+    console.log("INDEX", editDetailedData)
+    console.log(multipleParams)
+    if (multipleParams === true) {
+      readyData = {
+        name: name,
+        data: data,
+        contract: contractId,
+        keyName,
+        isDate,
+      };
+    } else if(index + 1) {
+      console.log("SOON", editDetailedData.lockupAndRelease.dates)
+      readyData ={
+        name: name,
+        data: data[index],
+     
+        contract: contractId,
+        keyName,
+        isDate,
+        index: index,
+      }
+      console.log(readyData, "GUCCI")
+    }
+    else {
+      readyData = {
+        name: name,
+        data: [data],
+        contract: contractId,
+        keyName,
+        isDate,
+      };
+    }
+   
     setDetailedData(readyData);
     setEditOpen(true);
   };
@@ -66,8 +130,8 @@ const Dashboard = () => {
   const getDetailedInfo = async () => {
     const docRef = doc(db, "events", contractId);
     const docSnap = await getDoc(docRef);
-    console.log(docSnap.data(), "DOCK SNAP")
-    console.log("STATUS OF DOC", docSnap.exists())
+    console.log(docSnap.data(), "DOCK SNAP");
+    console.log("STATUS OF DOC", docSnap.exists());
 
     if (!docSnap.data().editDetailedData) {
       console.log("docsnap not here");
@@ -95,6 +159,7 @@ const Dashboard = () => {
   };
   // console.log(editDetailedData.registrationOpens.seconds, "dates in component")
   // console.log(editDetailedData.registrationOpens, "dates in component")
+ 
   return (
     <>
       {editOpen ? (
@@ -105,6 +170,84 @@ const Dashboard = () => {
           setEditDetailedData={setEditDetailedData}
         />
       ) : null}
+      <div class="hit-the-floor"  id="m-topper">Условия Выпуска Токенов!</div>
+      <div class="textCard">
+        <Button
+          onClick={() =>
+            handleEdit(
+              true,
+              "Условия контракта",
+              [
+                {
+                  labelName: "условия выпуска токенов",
+                  formValue: editDetailedData.lockupAndRelease.text,
+                  keyName: "lockupAndRelease.text",
+                },
+                {
+                  labelName: "Количество Токенов",
+                  formValue: editDetailedData.lockupAndRelease.numberOfParts,
+                  keyName: "lockupAndRelease.numberOfParts",
+                },
+              ],
+
+              false
+            )
+          }
+          color="grey"
+          icon="edit"
+          id="specialEditContract"
+        />
+        {console.log(editDetailedData.lockupAndRelease.numberOfParts)}
+        <h1 class="textCardH1">
+          Количесво Частей:{editDetailedData.lockupAndRelease.numberOfParts}
+        </h1>
+        <div class="textCardContent">
+          <div class="textCardStyles">
+            Условия:{editDetailedData.lockupAndRelease.text}
+          </div>
+        </div>
+      </div>
+      {/* {console.log("helloooo",...Array(editDetailedData.lockupAndRelease.numberOfParts))} */}
+      {[
+        ...Array(parseInt(editDetailedData.lockupAndRelease.numberOfParts)),
+      ].map((part, index) => (
+        <div class="timeline" key={index}>
+          <div class="timeline__event  animated fadeInUp delay-3s timeline__event--type1">
+            <div class="timeline__event__icon ">
+              <Icon name="time" />
+              <div class="timeline__event__date">{moment(editDetailedData.lockupAndRelease.dates[index]).format(
+                "dddd, MMMM Do YYYY, h:mm:ss a"
+              )}</div>
+            </div>
+            <div class="timeline__event__content ">
+              <div class="timeline__event__title">
+                Количество Токенов На Выдочу:{" "}
+                { (editDetailedData.purchaseLimitsMax / editDetailedData.fixedSalePrice) / editDetailedData.lockupAndRelease.numberOfParts}
+              </div>
+              <div class="timeline__event__description">
+                <p></p>
+              </div>
+            </div>
+          </div>
+          <Button
+                  onClick={() =>
+                    handleEdit(
+                      false,
+                      "Дата Выдочи",
+                      editDetailedData.lockupAndRelease.dates,
+                      "lockupAndRelease.dates",
+                      true,
+                      index
+                     
+                    )
+                  }
+                  color="grey"
+                  icon="edit"
+                />
+             
+        </div>
+      ))}
+
       <div class="containerDash">
         <ul class="responsive-table">
           <li class="table-header">
@@ -123,9 +266,11 @@ const Dashboard = () => {
               <Button
                 onClick={() =>
                   handleEdit(
+                    false,
                     "количество токен на продажу",
                     editDetailedData["supplyForSale"],
                     "supplyForSale",
+                    false,
                     false
                   )
                 }
@@ -142,9 +287,11 @@ const Dashboard = () => {
               <Button
                 onClick={() =>
                   handleEdit(
+                    false,
                     "номинал ",
                     editDetailedData["fixedSalePrice"],
                     "fixedSalePrice",
+                    false,
                     false
                   )
                 }
@@ -161,9 +308,11 @@ const Dashboard = () => {
               <Button
                 onClick={() =>
                   handleEdit(
+                    false,
                     "цена договора",
                     editDetailedData["purchaseLimitsMax"],
                     "purchaseLimitsMax",
+                    false,
                     false
                   )
                 }
@@ -175,27 +324,32 @@ const Dashboard = () => {
           <li class="table-row">
             <div class="col col-1">4</div>
             <div class="col col-2"> количество токенов в 1 договоре </div>
-            <div class="col col-3">{editDetailedData.numberOfTokens}</div>
+            <div class="col col-3">
+              {editDetailedData.purchaseLimitsMax /
+                editDetailedData.fixedSalePrice}
+            </div>
             <div class="col col-4">
-              <Button
+              {/* <Button
                 onClick={() =>
                   handleEdit(
                     "количество токенов в 1 договоре ",
-                    editDetailedData["numberOfTokens"],
-                    "numberOfTokens",
+                    editDetailedData["numberOfTokensInOneContract"],
+                    "numberOfTokensInOneContract",
                     false
                   )
                 }
                 color="grey"
                 icon="edit"
-              />
+              /> */}
             </div>
           </li>
           <li class="table-row">
             <div class="col col-1">5</div>
             <div class="col col-2">Регистрация открывается</div>
             <div class="col col-3">
-              {moment(editDetailedData.registrationOpens).locale("ru").format("dddd, MMMM Do YYYY, h:mm:ss a")}
+              {moment(editDetailedData.registrationOpens)
+                .locale("ru")
+                .format("dddd, MMMM Do YYYY, h:mm:ss a")}
               {/* {moment().format(
                 "dddd, MMMM Do YYYY, h:mm:ss a",
                 editDetailedData.registrationOpens
@@ -205,10 +359,12 @@ const Dashboard = () => {
               <Button
                 onClick={() =>
                   handleEdit(
+                    false,
                     "Регистрация открывается",
                     editDetailedData.registrationOpens,
                     "registrationOpens",
-                    true
+                    true,
+                    false
                   )
                 }
                 color="grey"
@@ -220,16 +376,20 @@ const Dashboard = () => {
             <div class="col col-1">6</div>
             <div class="col col-2">регистрации завершается </div>
             <div class="col col-3">
-            {moment(editDetailedData.registrationEnds).format("dddd, MMMM Do YYYY, h:mm:ss a")}
+              {moment(editDetailedData.registrationEnds).format(
+                "dddd, MMMM Do YYYY, h:mm:ss a"
+              )}
             </div>
             <div class="col col-4">
               <Button
                 onClick={() =>
                   handleEdit(
+                    false,
                     "регистрации завершается",
                     editDetailedData["registrationEnds"],
                     "registrationEnds",
-                    true
+                    true,
+                    false
                   )
                 }
                 color="grey"
@@ -240,33 +400,20 @@ const Dashboard = () => {
           <li class="table-row">
             <div class="col col-1">7</div>
             <div class="col col-2">Окончание периода распродажи</div>
-            <div class="col col-3">{moment(editDetailedData.salePeriodStart).format("dddd, MMMM Do YYYY, h:mm:ss a")}</div>
+            <div class="col col-3">
+              {moment(editDetailedData.salePeriodStart).format(
+                "dddd, MMMM Do YYYY, h:mm:ss a"
+              )}
+            </div>
             <div class="col col-4">
               <Button
                 onClick={() =>
                   handleEdit(
+                    false,
                     "Окончание периода распродажи",
                     editDetailedData["salePeriodStart"],
                     "salePeriodStart",
-                    true
-                  )
-                }
-                color="grey"
-                icon="edit"
-              />
-            </div>
-          </li>
-          <li class="table-row">
-            <div class="col col-1">8</div>
-            <div class="col col-2">условия выпуска токенов </div>
-            <div class="col col-3">4</div>
-            <div class="col col-4">
-              <Button
-                onClick={() =>
-                  handleEdit(
-                    "условия выпуска токенов",
-                    editDetailedData["supplyForSale"],
-                    "supplyForSale",
+                    true,
                     false
                   )
                 }
@@ -275,6 +422,7 @@ const Dashboard = () => {
               />
             </div>
           </li>
+
           <li class="table-row">
             <div class="col col-1">9</div>
             <div class="col col-2">
@@ -285,9 +433,11 @@ const Dashboard = () => {
               <Button
                 onClick={() =>
                   handleEdit(
+                    false,
                     "фактическое количество участников на распродаже",
                     editDetailedData["participantNumber"],
                     "participantNumber",
+                    false,
                     false
                   )
                 }
@@ -304,9 +454,11 @@ const Dashboard = () => {
               <Button
                 onClick={() =>
                   handleEdit(
+                    false,
                     "количество полученных договоров",
                     editDetailedData["numberOfContracts"],
                     "numberOfContracts",
+                    false,
                     false
                   )
                 }
@@ -323,9 +475,11 @@ const Dashboard = () => {
               <Button
                 onClick={() =>
                   handleEdit(
+                    false,
                     "инвестиционная сумма ",
                     editDetailedData["investmentAmount"],
                     "investmentAmount",
+                    false,
                     false
                   )
                 }
@@ -342,9 +496,11 @@ const Dashboard = () => {
               <Button
                 onClick={() =>
                   handleEdit(
+                    false,
                     "количество токен на продажу",
                     editDetailedData["totalNumberOfTokens"],
                     "totalNumberOfTokens",
+                    false,
                     false
                   )
                 }
